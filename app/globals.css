@@ -1,0 +1,20 @@
+/* globals.css - Optimized */
+@layer base {
+  :root {
+    /* Simplify color variables */
+    --primary: 30 58 138;
+    --secondary: 14 165 233;
+    --accent: 220 38 38;
+    --background: 248 250 252;
+  }
+
+  body {
+    /* Simplify gradient */
+    @apply bg-gradient-to-br from-background to-gray-50;
+  }
+
+  /* Consolidate heading styles */
+  h1 { @apply text-4xl md:text-5xl }
+  h2 { @apply text-3xl md:text-4xl }
+  h3 { @apply text-2xl md:text-3xl }
+}
