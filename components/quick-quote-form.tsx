@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { ArrowRight, Loader2 } from "lucide-react"
+import { ArrowRight, Loader2 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 type FormData = {
@@ -23,18 +23,13 @@ interface QuickQuoteFormProps {
 export function QuickQuoteForm({ onClose }: QuickQuoteFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState("")
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<FormData>()
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>()
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true)
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      await new Promise(resolve => setTimeout(resolve, 2000))
       console.log(data)
       // Here you would typically send the data to your server or a third-party service
       // For now, we'll just log it and show a success message
@@ -45,7 +40,7 @@ export function QuickQuoteForm({ onClose }: QuickQuoteFormProps) {
         setTimeout(onClose, 3000)
       }
     } catch (error) {
-      console.error("Error submitting form:", error)
+      console.error('Error submitting form:', error)
       setMessage("There was a problem submitting your request. Please try again.")
     } finally {
       setIsSubmitting(false)
@@ -61,7 +56,11 @@ export function QuickQuoteForm({ onClose }: QuickQuoteFormProps) {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
-            <Input id="name" {...register("name", { required: "Name is required" })} className="w-full" />
+            <Input
+              id="name"
+              {...register("name", { required: "Name is required" })}
+              className="w-full"
+            />
             {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
           </div>
           <div className="space-y-2">
@@ -73,8 +72,8 @@ export function QuickQuoteForm({ onClose }: QuickQuoteFormProps) {
                 required: "Phone number is required",
                 pattern: {
                   value: /^\d{10}$/,
-                  message: "Please enter a valid 10-digit phone number",
-                },
+                  message: "Please enter a valid 10-digit phone number"
+                }
               })}
               className="w-full"
             />
@@ -89,8 +88,8 @@ export function QuickQuoteForm({ onClose }: QuickQuoteFormProps) {
                 required: "Email is required",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Please enter a valid email address",
-                },
+                  message: "Please enter a valid email address"
+                }
               })}
               className="w-full"
             />
@@ -109,7 +108,11 @@ export function QuickQuoteForm({ onClose }: QuickQuoteFormProps) {
               </SelectContent>
             </Select>
           </div>
-          <Button type="submit" variant="cta" className="w-full" disabled={isSubmitting}>
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
