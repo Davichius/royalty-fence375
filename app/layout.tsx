@@ -1,11 +1,11 @@
 import "./globals.css"
 import type { Metadata } from "next"
 import { Roboto, Poppins } from "next/font/google"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { ScrollToTop } from "@/components/scroll-to-top"
-import { cn } from "@/lib/utils"
-import { ThemeProvider } from "@/components/theme-provider"
+import { Header } from "../components/header"
+import { Footer } from "../components/footer"
+import { ScrollToTop } from "../components/scroll-to-top"
+import { cn } from "../lib/utils"
+import { ThemeProvider } from "../components/theme-provider"
 import { Analytics } from "@vercel/analytics/react"
 
 // Fonts configuration
@@ -74,33 +74,31 @@ export default function RootLayout({
                 {/* Skip Navigation Link */}
                 <a
                     href="#main-content"
-                    className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999]",
-                "focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg",
-                "dark:focus:bg-gray-800 dark:focus:text-white"
-        >
-                Skip to main content
-            </a>
+                    className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg dark:focus:bg-gray-800 dark:focus:text-white"
+                >
+                    Skip to main content
+                </a>
 
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                <Header />
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                    <Header />
 
-                <main id="main-content" className="flex-1 relative z-10">
-                    {children}
-                    <Analytics />
-                </main>
+                    <main id="main-content" className="flex-1 relative z-10">
+                        {children}
+                        <Analytics />
+                    </main>
 
-                <Footer />
-                <ScrollToTop />
-            </ThemeProvider>
+                    <Footer />
+                    <ScrollToTop />
+                </ThemeProvider>
 
-            {/* Background Texture */}
-            <div
-                className="fixed inset-0 -z-10 opacity-10 pattern-dots pattern-gray-400",
-            "dark:pattern-gray-700 pattern-size-4"
-            aria-hidden="true"
-            role="presentation"
-        />
-        </body>
-    </html >
-  )
+                {/* Background Texture */}
+                <div
+                    className="fixed inset-0 -z-10 opacity-10 pattern-dots pattern-gray-400 dark:pattern-gray-700 pattern-size-4"
+
+                    aria-hidden="true"
+                    role="presentation"
+                />
+            </body>
+        </html >
+    )
 }
