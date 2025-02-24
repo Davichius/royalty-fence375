@@ -1,12 +1,12 @@
-import "./globals.css"
-import type { Metadata } from "next"
-import { Roboto, Poppins } from "next/font/google"
-import { Header } from "../components/header"
-import { Footer } from "../components/footer"
-import { ScrollToTop } from "../components/scroll-to-top"
-import { cn } from "../lib/utils"
-import { ThemeProvider } from "../components/theme-provider"
-import { Analytics } from "@vercel/analytics/react"
+import "./globals.css";
+import type { Metadata } from "next";
+import { Roboto, Poppins } from "next/font/google";
+import { Header } from "../components/header";
+import { Footer } from "../components/footer";
+import { ScrollToTop } from "../components/scroll-to-top";
+import { cn } from "../lib/utils";
+import { ThemeProvider } from "../components/theme-provider";
+import { Analytics } from "@vercel/analytics/react";
 
 // Fonts configuration
 const roboto = Roboto({
@@ -14,14 +14,14 @@ const roboto = Roboto({
     weight: ["300", "400", "500", "700"],
     variable: "--font-body",
     display: "swap",
-})
+});
 
 const poppins = Poppins({
     subsets: ["latin"],
     weight: ["600", "700"],
     variable: "--font-heading",
     display: "swap",
-})
+});
 
 // Metadata configuration
 export const metadata: Metadata = {
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
         { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
         { media: "(prefers-color-scheme: dark)", color: "#0f172a" }
     ],
-}
+};
 
 export default function RootLayout({
     children,
@@ -94,11 +94,10 @@ export default function RootLayout({
                 {/* Background Texture */}
                 <div
                     className="fixed inset-0 -z-10 opacity-10 pattern-dots pattern-gray-400 dark:pattern-gray-700 pattern-size-4"
-
                     aria-hidden="true"
                     role="presentation"
                 />
             </body>
-        </html >
-    )
+        </html>
+    );
 }
