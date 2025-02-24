@@ -146,6 +146,6 @@
   }
 
   .dark\:text-dark-foreground {
-    color: var(--dark-foreground);
+    @apply text-dark-foreground;
   }
 }
