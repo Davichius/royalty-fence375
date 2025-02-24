@@ -11,7 +11,7 @@
     --accent: 220 38 38;
     --background: 248 250 252;
     --foreground: 15 23 42;
-    
+
     /* Dark Theme */
     --dark-primary: 96 165 250;
     --dark-primary-dark: 59 130 246;
@@ -61,6 +61,7 @@
 }
 
 @layer components {
+
   /* Custom Components */
   .btn-primary {
     @apply bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors focus:ring-4 focus:ring-primary/50 dark:bg-dark-primary dark:hover:bg-dark-primary-dark dark:focus:ring-dark-primary/50;
@@ -89,6 +90,7 @@
 }
 
 @layer utilities {
+
   /* Custom Utilities */
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out forwards;
@@ -104,8 +106,13 @@
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
   }
 
   @keyframes slideUp {
@@ -113,6 +120,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -130,5 +138,14 @@
   /* Dark Mode Text */
   .dark-text {
     @apply text-gray-300;
+  }
+
+  /* Ensure custom class is defined within a @layer directive */
+  .dark\:from-dark-background {
+    @apply from-dark-background;
+  }
+
+  .dark\:text-dark-foreground {
+    @apply text-dark-foreground;
   }
 }
