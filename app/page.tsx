@@ -1,19 +1,21 @@
-import Image from "next/image"
-import Link from "next/link"
-import dynamic from "next/dynamic"
-import { ArrowRight, Shield, Eye, Paintbrush, Users, Clock, MessageCircle } from "lucide-react"
-import { cn } from "@/lib/utils"
+import Image from "next/image";
+import Link from "next/link";
+import dynamic from 'next/dynamic';
+import { ArrowRight, Shield } from "lucide-react";
+import { cn } from "../lib/utils";
+import { ImageCarousel } from "../components/image-carousel"; // Adjust the path as necessary
 
 // Dynamically import heavy components with loading states
-const ImageCarousel = dynamic(() => import("@/components/image-carousel"), {
-    loading: () => <div className="h-screen w-full bg-gray-100 dark:bg-gray-900 animate-pulse" />
-})
-const QuickQuoteForm = dynamic(() => import("@/components/quick-quote-form"))
-const ContactOptions = dynamic(() => import("@/components/contact-options"))
-const Testimonial = dynamic(() => import("@/components/testimonial"), {
-    loading: () => <div className="h-64 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />
-})
-const ProjectGallery = dynamic(() => import("@/components/project-gallery"))
+const QuickQuoteForm = dynamic(() => import("../components/quick-quote-form").then(mod => mod.QuickQuoteForm || mod));
+const ContactOptions = dynamic(() => import("../components/contact-options").then(mod => mod.ContactOptions || mod));
+const Testimonial = dynamic(
+    () => import("../components/testimonial").then(mod => mod.Testimonial || mod),
+    {
+      ssr: false,
+      loading: () => <div className="h-64 bg-gray-100 dark:bg-gray-800 rounded-lg animate-pulse" />,
+    }
+);
+const ProjectGallery = dynamic(() => import("../components/project-gallery").then(mod => mod.ProjectGallery || mod));
 
 // Constants
 const BENEFITS = [
@@ -23,7 +25,7 @@ const BENEFITS = [
         description: "Enhance your property's security with our durable fencing solutions.",
     },
     // ... other benefits
-]
+];
 
 const SERVICES = [
     {
@@ -34,7 +36,7 @@ const SERVICES = [
         href: "/services/chain-link",
     },
     // ... other services
-]
+];
 
 const TESTIMONIALS = [
     {
@@ -43,7 +45,7 @@ const TESTIMONIALS = [
         rating: 5,
     },
     // ... other testimonials
-]
+];
 
 export default function Home() {
     return (
@@ -99,7 +101,12 @@ export default function Home() {
                     <SectionHeader title="Why Choose Royalty Fencing?" />
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {[
-                            // ... reasons
+                            {
+                                title: "Reason 1",
+                                description: "Description for reason 1",
+                                icon: Shield,
+                            },
+                            // ... other reasons
                         ].map((reason, index) => (
                             <ReasonCard key={index} {...reason} />
                         ))}
@@ -153,7 +160,7 @@ export default function Home() {
                 </SectionWrapper>
             </main>
         </div>
-    )
+    );
 }
 
 // Reusable Components with Dark Mode
@@ -162,7 +169,7 @@ function SectionWrapper({ id, className, children }: { id?: string; className?: 
         <section id={id} className={cn("py-20", className)}>
             <div className="container mx-auto px-4">{children}</div>
         </section>
-    )
+    );
 }
 
 function SectionHeader({ title, description }: { title: string; description?: string }) {
@@ -175,7 +182,7 @@ function SectionHeader({ title, description }: { title: string; description?: st
                 </p>
             )}
         </>
-    )
+    );
 }
 
 function BenefitCard({ title, icon: Icon, description }: { title: string; icon: React.ElementType; description: string }) {
@@ -185,10 +192,16 @@ function BenefitCard({ title, icon: Icon, description }: { title: string; icon: 
             <h3 className="text-xl font-semibold mb-2 text-primary dark:text-primary-300">{title}</h3>
             <p className="text-base text-gray-600 dark:text-gray-300">{description}</p>
         </div>
-    )
+    );
 }
 
-function ServiceCard({ title, image, alt, description, href }: { title: string; image: string; alt: string; description: string; href: string }) {
+function ServiceCard({ title, image, alt, description, href }: { 
+    title: string; 
+    image: string; 
+    alt: string; 
+    description: string; 
+    href: string 
+}) {
     return (
         <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-105 hover:shadow-xl">
             <Image
@@ -203,12 +216,15 @@ function ServiceCard({ title, image, alt, description, href }: { title: string; 
             <div className="p-6">
                 <h3 className="text-2xl font-bold mb-4 text-primary dark:text-primary-300">{title}</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">{description}</p>
-                <Link href={href} className="text-primary dark:text-primary-300 hover:text-accent font-medium flex items-center">
+                <Link
+                    href={href}
+                    className="text-primary dark:text-primary-300 hover:text-accent font-medium flex items-center"
+                >
                     Learn more <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>
             </div>
         </div>
-    )
+    );
 }
 
 function ReasonCard({ title, description, icon: Icon }: { title: string; description: string; icon: React.ElementType }) {
@@ -224,5 +240,5 @@ function ReasonCard({ title, description, icon: Icon }: { title: string; descrip
                 <p className="text-gray-600 dark:text-gray-300">{description}</p>
             </div>
         </div>
-    )
+    );
 }

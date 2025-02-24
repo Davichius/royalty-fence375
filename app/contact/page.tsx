@@ -1,6 +1,6 @@
-import { QuickQuoteForm } from "@/components/quick-quote-form"
-import { ContactOptions } from "@/components/contact-options"
-import { Button } from "@/components/ui/button"
+import { QuickQuoteForm } from "../../components/quick-quote-form"
+import { ContactOptions } from "../../components/contact-options"
+// import { Button } from "@/components/ui/button" // Removed as it is not used in the code
 
 export default function ContactPage() {
   return (
@@ -35,8 +35,22 @@ export default function ContactPage() {
           <iframe
             src="https://maps.google.com/maps?q=Orange%20City%2C%20FL&t=&z=11&ie=UTF8&iwloc=&output=embed"
             className="w-full h-64 md:h-80"
-            loading="lazy"
             aria-label="Service Area Map"
+            ref={(iframe) => {
+              if (iframe) {
+                if ('loading' in HTMLIFrameElement.prototype) {
+                  iframe.loading = 'lazy';
+                } else {
+                    import('lazysizes').then((module) => {
+                    const lazySizes = module.default;
+                    lazySizes.init();
+                    iframe.classList.add('lazyload');
+                    }).catch((error) => {
+                    console.error('Failed to load lazysizes', error);
+                    });
+                }
+              }
+            }}
           />
         </div>
       </main>
